@@ -7,6 +7,8 @@ export default class Tutorial extends Component {
     this.onChangename = this.onChangename.bind(this);
     this.onChangeDescription = this.onChangeDescription.bind(this);
     this.onChangeimg = this.onChangeimg.bind(this);
+    this.onChangetype = this.onChangetype.bind(this);
+
     this.onChangesliderfield = this.onChangesliderfield.bind(this);
     this.onChangetechfield = this.onChangetechfield.bind(this);
     this.onChangeurl = this.onChangeurl.bind(this);
@@ -21,6 +23,7 @@ export default class Tutorial extends Component {
         name: "",
         description: "",
         img: "",
+        type: "",
         sliderfield: "",
         techfield: "",
         url: "",
@@ -83,6 +86,17 @@ export default class Tutorial extends Component {
     }));
   }
 
+  onChangetype(e) {
+    const type = e.target.value;
+
+    this.setState((prevState) => ({
+      currentTutorial: {
+        ...prevState.currentTutorial,
+        type: type,
+      },
+    }));
+  }
+
   onChangesliderfield(e) {
     const sliderfield = e.target.value;
 
@@ -137,6 +151,7 @@ export default class Tutorial extends Component {
     const data = {
       name: this.state.currentTutorial.name,
       description: this.state.currentTutorial.description,
+      type: this.state.currentTutorial.type,
       img: this.state.currentTutorial.img,
       sliderfield: this.state.currentTutorial.sliderfield,
       techfield: this.state.currentTutorial.techfield,
@@ -202,6 +217,16 @@ export default class Tutorial extends Component {
                   id="img"
                   value={currentTutorial.img}
                   onChange={this.onChangeimg}
+                />
+              </div>
+              <div className="form-group">
+                <label htmlFor="type">type</label>
+                <input
+                  type="text"
+                  className="form-control"
+                  id="type"
+                  value={currentTutorial.type}
+                  onChange={this.onChangetype}
                 />
               </div>
               <div className="form-group">

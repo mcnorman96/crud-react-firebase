@@ -7,6 +7,8 @@ export default class AddTutorial extends Component {
     this.onChangename = this.onChangename.bind(this);
     this.onChangeDescription = this.onChangeDescription.bind(this);
     this.onChangeimg = this.onChangeimg.bind(this);
+    this.onChangetype = this.onChangetype.bind(this);
+
     this.onChangesliderfield = this.onChangesliderfield.bind(this);
     this.onChangetechfield = this.onChangetechfield.bind(this);
     this.onChangeurl = this.onChangeurl.bind(this);
@@ -18,6 +20,7 @@ export default class AddTutorial extends Component {
       name: "",
       description: "",
       img: "",
+      type: "",
       sliderfield: "",
       techfield: "",
       url: "",
@@ -44,6 +47,12 @@ export default class AddTutorial extends Component {
     });
   }
 
+  onChangetype(e) {
+    this.setState({
+      type: e.target.value,
+    });
+  }
+
   onChangesliderfield(e) {
     this.setState({
       sliderfield: e.target.value,
@@ -67,6 +76,7 @@ export default class AddTutorial extends Component {
       name: this.state.name,
       description: this.state.description,
       img: this.state.img,
+      type: this.state.type,
       sliderfield: this.state.sliderfield,
       techfield: this.state.techfield,
       url: this.state.url,
@@ -90,6 +100,7 @@ export default class AddTutorial extends Component {
       name: "",
       description: "",
       img: "",
+      type: "",
       sliderfield: "",
       techfield: "",
       url: "",
@@ -126,7 +137,8 @@ export default class AddTutorial extends Component {
 
             <div className="form-group">
               <label htmlFor="description">Description</label>
-              <input
+              <textarea
+              cols="40" rows="5"
                 type="text"
                 className="form-control"
                 id="description"
@@ -134,7 +146,7 @@ export default class AddTutorial extends Component {
                 value={this.state.description}
                 onChange={this.onChangeDescription}
                 name="description"
-              />
+              ></textarea>
             </div>
 
             <div className="form-group">
@@ -147,6 +159,19 @@ export default class AddTutorial extends Component {
                 value={this.state.img}
                 onChange={this.onChangeimg}
                 name="img"
+              />
+            </div>
+
+            <div className="form-group">
+              <label htmlFor="type">type</label>
+              <input
+                type="text"
+                className="form-control"
+                id="type"
+                required
+                value={this.state.type}
+                onChange={this.onChangetype}
+                name="type"
               />
             </div>
 

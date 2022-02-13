@@ -38,6 +38,7 @@ export default class TutorialsList extends Component {
         name: data.name,
         description: data.description,
         img: data.img,
+        type: data.type,
         sliderfield: data.sliderfield,
         techfield: data.techfield,
         published: data.published,
@@ -70,7 +71,7 @@ export default class TutorialsList extends Component {
     return (
       <div className="list row">
         <div className="col-md-3">
-          <h4>Tutorials List</h4>
+          <h4>Projects List</h4>
 
           <ul className="list-group">
             {tutorials &&
@@ -97,7 +98,7 @@ export default class TutorialsList extends Component {
           ) : (
             <div>
               <br />
-              <p>Please click on a Tutorial...</p>
+              <p>Please click on a Project...</p>
             </div>
           )}
         </div>
