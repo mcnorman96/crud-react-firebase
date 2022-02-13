@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import TutorialDataService from "../services/tutorial.service";
+import ProjectDataService from "../services/project.service";
 
-export default class Tutorial extends Component {
+export default class Project extends Component {
   constructor(props) {
     super(props);
     this.onChangename = this.onChangename.bind(this);
@@ -14,11 +14,11 @@ export default class Tutorial extends Component {
     this.onChangeurl = this.onChangeurl.bind(this);
 
     this.updatePublished = this.updatePublished.bind(this);
-    this.updateTutorial = this.updateTutorial.bind(this);
-    this.deleteTutorial = this.deleteTutorial.bind(this);
+    this.updateProject = this.updateProject.bind(this);
+    this.deleteProject = this.deleteProject.bind(this);
 
     this.state = {
-      currentTutorial: {
+      currentProject: {
         id: null,
         name: "",
         description: "",
@@ -34,20 +34,20 @@ export default class Tutorial extends Component {
   }
 
   static getDerivedStateFromProps(nextProps, prevState) {
-    const { tutorial } = nextProps;
-    if (prevState.currentTutorial.id !== tutorial.id) {
+    const { project } = nextProps;
+    if (prevState.currentProject.id !== project.id) {
       return {
-        currentTutorial: tutorial,
+        currentProject: project,
         message: ""
       };
     }
 
-    return prevState.currentTutorial;
+    return prevState.currentProject;
   }
 
   componentDidMount() {
     this.setState({
-      currentTutorial: this.props.tutorial,
+      currentProject: this.props.project,
     });
   }
 
@@ -56,8 +56,8 @@ export default class Tutorial extends Component {
 
     this.setState(function (prevState) {
       return {
-        currentTutorial: {
-          ...prevState.currentTutorial,
+        currentProject: {
+          ...prevState.currentProject,
           name: name,
         },
       };
@@ -68,8 +68,8 @@ export default class Tutorial extends Component {
     const description = e.target.value;
 
     this.setState((prevState) => ({
-      currentTutorial: {
-        ...prevState.currentTutorial,
+      currentProject: {
+        ...prevState.currentProject,
         description: description,
       },
     }));
@@ -79,8 +79,8 @@ export default class Tutorial extends Component {
     const img = e.target.value;
 
     this.setState((prevState) => ({
-      currentTutorial: {
-        ...prevState.currentTutorial,
+      currentProject: {
+        ...prevState.currentProject,
         img: img,
       },
     }));
@@ -90,8 +90,8 @@ export default class Tutorial extends Component {
     const type = e.target.value;
 
     this.setState((prevState) => ({
-      currentTutorial: {
-        ...prevState.currentTutorial,
+      currentProject: {
+        ...prevState.currentProject,
         type: type,
       },
     }));
@@ -101,8 +101,8 @@ export default class Tutorial extends Component {
     const sliderfield = e.target.value;
 
     this.setState((prevState) => ({
-      currentTutorial: {
-        ...prevState.currentTutorial,
+      currentProject: {
+        ...prevState.currentProject,
         sliderfield: sliderfield,
       },
     }));
@@ -111,8 +111,8 @@ export default class Tutorial extends Component {
     const techfield = e.target.value;
 
     this.setState((prevState) => ({
-      currentTutorial: {
-        ...prevState.currentTutorial,
+      currentProject: {
+        ...prevState.currentProject,
         techfield: techfield,
       },
     }));
@@ -122,21 +122,21 @@ export default class Tutorial extends Component {
     const url = e.target.value;
 
     this.setState((prevState) => ({
-      currentTutorial: {
-        ...prevState.currentTutorial,
+      currentProject: {
+        ...prevState.currentProject,
         url: url,
       },
     }));
   }
 
   updatePublished(status) {
-    TutorialDataService.update(this.state.currentTutorial.id, {
+    ProjectDataService.update(this.state.currentProject.id, {
       published: status,
     })
       .then(() => {
         this.setState((prevState) => ({
-          currentTutorial: {
-            ...prevState.currentTutorial,
+          currentProject: {
+            ...prevState.currentProject,
             published: status,
           },
           message: "The status was updated successfully!",
@@ -147,21 +147,21 @@ export default class Tutorial extends Component {
       });
   }
 
-  updateTutorial() {
+  updateProject() {
     const data = {
-      name: this.state.currentTutorial.name,
-      description: this.state.currentTutorial.description,
-      type: this.state.currentTutorial.type,
-      img: this.state.currentTutorial.img,
-      sliderfield: this.state.currentTutorial.sliderfield,
-      techfield: this.state.currentTutorial.techfield,
-      url: this.state.currentTutorial.url,
+      name: this.state.currentProject.name,
+      description: this.state.currentProject.description,
+      type: this.state.currentProject.type,
+      img: this.state.currentProject.img,
+      sliderfield: this.state.currentProject.sliderfield,
+      techfield: this.state.currentProject.techfield,
+      url: this.state.currentProject.url,
     };
 
-    TutorialDataService.update(this.state.currentTutorial.id, data)
+    ProjectDataService.update(this.state.currentProject.id, data)
       .then(() => {
         this.setState({
-          message: "The tutorial was updated successfully!",
+          message: "The project was updated successfully!",
         });
       })
       .catch((e) => {
@@ -169,8 +169,8 @@ export default class Tutorial extends Component {
       });
   }
 
-  deleteTutorial() {
-    TutorialDataService.delete(this.state.currentTutorial.id)
+  deleteProject() {
+    ProjectDataService.delete(this.state.currentProject.id)
       .then(() => {
         this.props.refreshList();
       })
@@ -180,12 +180,11 @@ export default class Tutorial extends Component {
   }
 
   render() {
-    const { currentTutorial } = this.state;
-    console.log({ currentTutorial });
+    const { currentProject } = this.state;
     return (
       <div>
-        <h4>Tutorial</h4>
-        {currentTutorial ? (
+        <h4>Project</h4>
+        {currentProject ? (
           <div className="edit-form">
             <form>
               <div className="form-group">
@@ -194,7 +193,7 @@ export default class Tutorial extends Component {
                   type="text"
                   className="form-control"
                   id="name"
-                  value={currentTutorial.name}
+                  value={currentProject.name}
                   onChange={this.onChangename}
                 />
               </div>
@@ -205,7 +204,7 @@ export default class Tutorial extends Component {
                   type="text"
                   className="form-control"
                   id="description"
-                  value={currentTutorial.description}
+                  value={currentProject.description}
                   onChange={this.onChangeDescription}
                 ></textarea>
               </div>
@@ -215,7 +214,7 @@ export default class Tutorial extends Component {
                   type="text"
                   className="form-control"
                   id="img"
-                  value={currentTutorial.img}
+                  value={currentProject.img}
                   onChange={this.onChangeimg}
                 />
               </div>
@@ -225,7 +224,7 @@ export default class Tutorial extends Component {
                   type="text"
                   className="form-control"
                   id="type"
-                  value={currentTutorial.type}
+                  value={currentProject.type}
                   onChange={this.onChangetype}
                 />
               </div>
@@ -235,7 +234,7 @@ export default class Tutorial extends Component {
                   type="text"
                   className="form-control"
                   id="sliderfield"
-                  value={currentTutorial.sliderfield}
+                  value={currentProject.sliderfield}
                   onChange={this.onChangesliderfield}
                 />
               </div>
@@ -245,7 +244,7 @@ export default class Tutorial extends Component {
                   type="text"
                   className="form-control"
                   id="techfield"
-                  value={currentTutorial.techfield}
+                  value={currentProject.techfield}
                   onChange={this.onChangetechfield}
                 />
               </div>
@@ -255,56 +254,32 @@ export default class Tutorial extends Component {
                   type="text"
                   className="form-control"
                   id="url"
-                  value={currentTutorial.url}
+                  value={currentProject.url}
                   onChange={this.onChangeurl}
                 />
               </div>
-              
-
-              <div className="form-group">
-                <label>
-                  <strong>Status:</strong>
-                </label>
-                {currentTutorial.published ? "Published" : "Pending"}
-              </div>
             </form>
-
-            {currentTutorial.published ? (
-              <button
-                className="badge badge-primary mr-2"
-                onClick={() => this.updatePublished(false)}
-              >
-                UnPublish
-              </button>
-            ) : (
-              <button
-                className="badge badge-primary mr-2"
-                onClick={() => this.updatePublished(true)}
-              >
-                Publish
-              </button>
-            )}
-
-            <button
-              className="badge badge-danger mr-2"
-              onClick={this.deleteTutorial}
-            >
-              Delete
-            </button>
-
             <button
               type="submit"
               className="badge badge-success"
-              onClick={this.updateTutorial}
+              onClick={this.updateProject}
             >
               Update
+            </button>
+
+
+            <button
+              className="badge badge-danger mr-2"
+              onClick={this.deleteProject}
+            >
+              Delete
             </button>
             <p>{this.state.message}</p>
           </div>
         ) : (
           <div>
             <br />
-            <p>Please click on a Tutorial...</p>
+            <p>Please click on a project...</p>
           </div>
         )}
       </div>

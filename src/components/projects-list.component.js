@@ -1,18 +1,18 @@
 import React, { Component } from "react";
-import TutorialDataService from "../services/tutorial.service";
+import ProjectDataService from "../services/project.service";
 
-import Tutorial from "./tutorial.component";
+import Project from "./project.component";
 
-export default class TutorialsList extends Component {
+export default class ProjectsList extends Component {
   constructor(props) {
     super(props);
     this.refreshList = this.refreshList.bind(this);
-    this.setActiveTutorial = this.setActiveTutorial.bind(this);
+    this.setActiveProject = this.setActiveProject.bind(this);
     this.onDataChange = this.onDataChange.bind(this);
 
     this.state = {
-      tutorials: [],
-      currentTutorial: null,
+      projects: [],
+      currentProject: null,
       currentIndex: -1,
     };
 
@@ -20,7 +20,7 @@ export default class TutorialsList extends Component {
   }
 
   componentDidMount() {
-    this.unsubscribe = TutorialDataService.getAll().orderBy("name", "asc").onSnapshot(this.onDataChange);
+    this.unsubscribe = ProjectDataService.getAll().orderBy("name", "asc").onSnapshot(this.onDataChange);
   }
 
   componentWillUnmount() {
@@ -28,12 +28,12 @@ export default class TutorialsList extends Component {
   }
 
   onDataChange(items) {
-    let tutorials = [];
+    let projects = [];
 
     items.forEach((item) => {
       let id = item.id;
       let data = item.data();
-      tutorials.push({
+      projects.push({
         id: id,
         name: data.name,
         description: data.description,
@@ -47,26 +47,26 @@ export default class TutorialsList extends Component {
     });
 
     this.setState({
-      tutorials: tutorials,
+      projects: projects,
     });
   }
 
   refreshList() {
     this.setState({
-      currentTutorial: null,
+      currentProject: null,
       currentIndex: -1,
     });
   }
 
-  setActiveTutorial(tutorial, index) {
+  setActiveProject(project, index) {
     this.setState({
-      currentTutorial: tutorial,
+      currentProject: project,
       currentIndex: index,
     });
   }
 
   render() {
-    const { tutorials, currentTutorial, currentIndex } = this.state;
+    const { projects, currentProject, currentIndex } = this.state;
 
     return (
       <div className="list row">
@@ -74,25 +74,25 @@ export default class TutorialsList extends Component {
           <h4>Projects List</h4>
 
           <ul className="list-group">
-            {tutorials &&
-              tutorials.map((tutorial, index) => (
+            {projects &&
+              projects.map((project, index) => (
                 <li
                   className={
                     "list-group-item " +
                     (index === currentIndex ? "active" : "")
                   }
-                  onClick={() => this.setActiveTutorial(tutorial, index)}
+                  onClick={() => this.setActiveProject(project, index)}
                   key={index}
                 >
-                  {tutorial.name}
+                  {project.name}
                 </li>
               ))}
           </ul>
         </div>
         <div className="col-md-9">
-          {currentTutorial ? (
-            <Tutorial
-              tutorial={currentTutorial}
+          {currentProject ? (
+            <Project
+              project={currentProject}
               refreshList={this.refreshList}
             />
           ) : (

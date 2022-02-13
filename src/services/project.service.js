@@ -2,13 +2,13 @@ import firebase from "../firebase";
 
 const db = firebase.collection("/development");
 
-class TutorialDataService {
+class ProjectDataService {
   getAll() {
     return db;
   }
 
-  create(tutorial) {
-    return db.add(tutorial);
+  create(project) {
+    return db.add(project);
   }
 
   update(id, value) {
@@ -20,4 +20,4 @@ class TutorialDataService {
   }
 }
 
-export default new TutorialDataService();
+export default new ProjectDataService();

@@ -3,8 +3,8 @@ import { Switch, Route, Link } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 
-import AddTutorial from "./components/add-tutorial.component";
-import TutorialsList from "./components/tutorials-list.component";
+import AddTutorial from "./components/add-project.component";
+import TutorialsList from "./components/projects-list.component";
 
 class App extends Component {
   render() {
