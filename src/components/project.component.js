@@ -12,6 +12,7 @@ export default class Project extends Component {
     this.onChangesliderfield = this.onChangesliderfield.bind(this);
     this.onChangetechfield = this.onChangetechfield.bind(this);
     this.onChangeurl = this.onChangeurl.bind(this);
+    this.onChangeorder = this.onChangeorder.bind(this);
 
     this.updatePublished = this.updatePublished.bind(this);
     this.updateProject = this.updateProject.bind(this);
@@ -27,6 +28,7 @@ export default class Project extends Component {
         sliderfield: "",
         techfield: "",
         url: "",
+        order: "",
         published: false,
       },
       message: "",
@@ -129,6 +131,17 @@ export default class Project extends Component {
     }));
   }
 
+  onChangeorder(e) {
+    const order = e.target.value;
+
+    this.setState((prevState) => ({
+      currentProject: {
+        ...prevState.currentProject,
+        order: order,
+      },
+    }));
+  }
+
   updatePublished(status) {
     ProjectDataService.update(this.state.currentProject.id, {
       published: status,
@@ -156,6 +169,7 @@ export default class Project extends Component {
       sliderfield: this.state.currentProject.sliderfield,
       techfield: this.state.currentProject.techfield,
       url: this.state.currentProject.url,
+      order: this.state.currentProject.order,
     };
 
     ProjectDataService.update(this.state.currentProject.id, data)
@@ -181,6 +195,9 @@ export default class Project extends Component {
 
   render() {
     const { currentProject } = this.state;
+    if(currentProject){
+      console.log(currentProject);
+    }
     return (
       <div>
         <h4>Project</h4>
@@ -258,6 +275,16 @@ export default class Project extends Component {
                   onChange={this.onChangeurl}
                 />
               </div>
+              <div className="form-group">
+                <label htmlFor="order">order</label>
+                <input
+                  type="number"
+                  className="form-control"
+                  id="order"
+                  value={currentProject.order}
+                  onChange={this.onChangeorder}
+                />
+              </div>
             </form>
             <button
               type="submit"
@@ -266,8 +293,6 @@ export default class Project extends Component {
             >
               Update
             </button>
-
-
             <button
               className="badge badge-danger mr-2"
               onClick={this.deleteProject}

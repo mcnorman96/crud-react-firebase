@@ -41,6 +41,7 @@ export default class ProjectsList extends Component {
         type: data.type,
         sliderfield: data.sliderfield,
         techfield: data.techfield,
+        order: data.order,
         published: data.published,
         url: data.url,
       });

@@ -12,6 +12,7 @@ export default class AddProject extends Component {
     this.onChangesliderfield = this.onChangesliderfield.bind(this);
     this.onChangetechfield = this.onChangetechfield.bind(this);
     this.onChangeurl = this.onChangeurl.bind(this);
+    this.onChangeorder = this.onChangeorder.bind(this);
 
     this.saveProject = this.saveProject.bind(this);
     this.newProject = this.newProject.bind(this);
@@ -25,6 +26,7 @@ export default class AddProject extends Component {
       techfield: "",
       url: "",
       published: false,
+      order: "",
       submitted: false,
     };
   }
@@ -71,6 +73,12 @@ export default class AddProject extends Component {
     });
   }
 
+  onChangeorder(e) {
+    this.setState({
+      order: e.target.value,
+    });
+  }
+
   saveProject() {
     let data = {
       name: this.state.name,
@@ -80,7 +88,8 @@ export default class AddProject extends Component {
       sliderfield: this.state.sliderfield,
       techfield: this.state.techfield,
       url: this.state.url,
-      published: false
+      published: false, 
+      order: this.state.order,
     };
 
     ProjectDataService.create(data)
@@ -104,6 +113,7 @@ export default class AddProject extends Component {
       sliderfield: "",
       techfield: "",
       url: "",
+      order: "",
       published: false,
       submitted: false,
     });
@@ -213,6 +223,18 @@ export default class AddProject extends Component {
               />
             </div>
             
+            <div className="form-group">
+              <label htmlFor="order">order</label>
+              <input
+                type="text"
+                className="form-control"
+                id="order"
+                required
+                value={this.state.order}
+                onChange={this.onChangeorder}
+                name="order"
+              />
+            </div>
 
             <button onClick={this.saveProject} className="btn btn-success">
               Submit
