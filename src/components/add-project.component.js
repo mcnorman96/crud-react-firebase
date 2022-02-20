@@ -12,6 +12,7 @@ export default class AddProject extends Component {
     this.onChangesliderfield = this.onChangesliderfield.bind(this);
     this.onChangetechfield = this.onChangetechfield.bind(this);
     this.onChangeurl = this.onChangeurl.bind(this);
+    this.onChangegithuburl = this.onChangegithuburl.bind(this);
     this.onChangeorder = this.onChangeorder.bind(this);
 
     this.saveProject = this.saveProject.bind(this);
@@ -25,6 +26,7 @@ export default class AddProject extends Component {
       sliderfield: "",
       techfield: "",
       url: "",
+      githuburl: "",
       published: false,
       order: "",
       submitted: false,
@@ -72,6 +74,11 @@ export default class AddProject extends Component {
       url: e.target.value,
     });
   }
+  onChangegithuburl(e) {
+    this.setState({
+      githuburl: e.target.value,
+    });
+  }
 
   onChangeorder(e) {
     this.setState({
@@ -88,6 +95,7 @@ export default class AddProject extends Component {
       sliderfield: this.state.sliderfield,
       techfield: this.state.techfield,
       url: this.state.url,
+      githuburl: this.state.githuburl,
       published: false, 
       order: this.state.order,
     };
@@ -113,6 +121,7 @@ export default class AddProject extends Component {
       sliderfield: "",
       techfield: "",
       url: "",
+      githuburl: "",
       order: "",
       published: false,
       submitted: false,
@@ -220,6 +229,19 @@ export default class AddProject extends Component {
                 value={this.state.url}
                 onChange={this.onChangeurl}
                 name="url"
+              />
+            </div>
+
+            <div className="form-group">
+              <label htmlFor="githuburl">githuburl</label>
+              <input
+                type="text"
+                className="form-control"
+                id="githuburl"
+                required
+                value={this.state.githuburl}
+                onChange={this.onChangegithuburl}
+                name="githuburl"
               />
             </div>
             
