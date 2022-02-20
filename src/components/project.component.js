@@ -12,6 +12,7 @@ export default class Project extends Component {
     this.onChangesliderfield = this.onChangesliderfield.bind(this);
     this.onChangetechfield = this.onChangetechfield.bind(this);
     this.onChangeurl = this.onChangeurl.bind(this);
+    this.onChangegithuburl = this.onChangegithuburl.bind(this);
     this.onChangeorder = this.onChangeorder.bind(this);
 
     this.updatePublished = this.updatePublished.bind(this);
@@ -28,6 +29,7 @@ export default class Project extends Component {
         sliderfield: "",
         techfield: "",
         url: "",
+        githuburl: "",
         order: "",
         published: false,
       },
@@ -131,6 +133,17 @@ export default class Project extends Component {
     }));
   }
 
+  onChangegithuburl(e) {
+    const githuburl = e.target.value;
+
+    this.setState((prevState) => ({
+      currentProject: {
+        ...prevState.currentProject,
+        githuburl: githuburl,
+      },
+    }));
+  }
+
   onChangeorder(e) {
     const order = e.target.value;
 
@@ -169,6 +182,7 @@ export default class Project extends Component {
       sliderfield: this.state.currentProject.sliderfield,
       techfield: this.state.currentProject.techfield,
       url: this.state.currentProject.url,
+      githuburl: this.state.currentProject.githuburl,
       order: this.state.currentProject.order,
     };
 
@@ -195,9 +209,7 @@ export default class Project extends Component {
 
   render() {
     const { currentProject } = this.state;
-    if(currentProject){
-      console.log(currentProject);
-    }
+
     return (
       <div>
         <h4>Project</h4>
@@ -273,6 +285,16 @@ export default class Project extends Component {
                   id="url"
                   value={currentProject.url}
                   onChange={this.onChangeurl}
+                />
+              </div>
+              <div className="form-group">
+                <label htmlFor="githuburl">githuburl</label>
+                <input
+                  type="text"
+                  className="form-control"
+                  id="githuburl"
+                  value={currentProject.githuburl}
+                  onChange={this.onChangegithuburl}
                 />
               </div>
               <div className="form-group">

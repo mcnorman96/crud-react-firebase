@@ -24,7 +24,7 @@
 
 .badge {
   padding: 15px 25px; 
-
+  border: none;
 }
 
 .badge:nth-child(3) {

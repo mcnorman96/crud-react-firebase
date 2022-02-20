@@ -44,6 +44,7 @@ export default class ProjectsList extends Component {
         order: data.order,
         published: data.published,
         url: data.url,
+        githuburl: data.githuburl,
       });
     });
 
