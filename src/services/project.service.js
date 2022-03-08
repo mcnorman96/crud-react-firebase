@@ -1,6 +1,6 @@
 import firebase from "../firebase";
 
-const db = firebase.collection("/development");
+const db = firebase.collection("/projects");
 
 class ProjectDataService {
   getAll() {
